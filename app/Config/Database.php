@@ -13,22 +13,24 @@ class Database extends Config
 
     public array $default = [
         'DSN'          => '',
-        'hostname'     => '127.0.0.1',
-        'username'     => 'itso_db_user',
-        'password'     => 'itso_password_123',
-        'database'     => 'itso_equipment_db',
-        'DBDriver'     => 'MySQLi',
+        'hostname'     => '',
+        'username'     => '',
+        'password'     => '',
+        'database'     => '',
+        'DBDriver'     => 'SQLite3',
         'DBPrefix'     => '',
         'pConnect'     => false,
         'DBDebug'      => true,
-        'charset'      => 'utf8mb4',
-        'DBCollat'     => 'utf8mb4_general_ci',
+        'charset'      => 'utf8',
+        'DBCollat'     => '',
         'swapPre'      => '',
         'encrypt'      => false,
         'compress'     => false,
         'strictOn'     => false,
         'failover'     => [],
         'port'         => 3306,
+        'foreignKeys'  => true,
+        'busyTimeout'  => 1000,
         'numberNative' => false,
         'foundRows'    => false,
         'dateFormat'   => [
@@ -74,24 +76,24 @@ class Database extends Config
             return;
         }
 
+        // Default to self-contained SQLite3 database
+        $sqlitePath = defined('WRITEPATH') ? WRITEPATH . 'itso_equipment_db.sqlite' : dirname(__DIR__, 2) . '/writable/itso_equipment_db.sqlite';
+        $this->default['database'] = $sqlitePath;
+        $this->default['DBDriver'] = 'SQLite3';
+
+        // If external MySQL credentials are provided, switch to MySQLi
         if ($host = getenv('DB_HOST')) {
+            $this->default['DBDriver'] = 'MySQLi';
             $this->default['hostname'] = $host;
-        }
-        if ($user = getenv('DB_USER')) {
-            $this->default['username'] = $user;
-        }
-        if ($pass = getenv('DB_PASS')) {
-            $this->default['password'] = $pass;
-        }
-        if ($name = getenv('DB_NAME')) {
-            $this->default['database'] = $name;
-        }
-        if ($port = getenv('DB_PORT')) {
-            $this->default['port'] = (int) $port;
+            $this->default['username'] = getenv('DB_USER') ?: 'root';
+            $this->default['password'] = getenv('DB_PASS') ?: '';
+            $this->default['database'] = getenv('DB_NAME') ?: 'itso_equipment_db';
+            $this->default['port'] = getenv('DB_PORT') ? (int) getenv('DB_PORT') : 3306;
         }
 
         $dbUrl = getenv('DATABASE_URL') ?: getenv('MYSQL_URL');
         if ($dbUrl && $parsed = parse_url($dbUrl)) {
+            $this->default['DBDriver'] = 'MySQLi';
             if (!empty($parsed['host'])) {
                 $this->default['hostname'] = $parsed['host'];
             }
