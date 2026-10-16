@@ -1,68 +1,179 @@
-# CodeIgniter 4 Application Starter
+<div align="center">
 
-## What is CodeIgniter?
+# 📦 ITSO Equipment Management System (ITSO EMS)
+**An Enterprise Academic Equipment Inventory, Reservation & Loan Lifecycle Platform**
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+[![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/)
+[![Framework](https://img.shields.io/badge/CodeIgniter-4.6-EF4444?style=for-the-badge&logo=codeigniter&logoColor=white)](https://codeigniter.com/)
+[![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Database](https://img.shields.io/badge/Database-SQLite%20%7C%20MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+<br/>
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+> Built for the **Institute of Technology Services Office (ITSO)** at **FEU Institute of Technology** to streamline the end-to-end loaning, reservation, tracking, and maintenance of academic laboratory equipment.
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+</div>
 
-## Installation & updates
+---
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+## 📌 Executive Overview
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+The **ITSO Equipment Management System (ITSO EMS)** is a production-ready, full-stack web platform engineered to eliminate manual paper slips, equipment loss, and reservation conflicts across university departments. 
 
-## Setup
+It provides an automated inventory tracking engine that updates equipment availability in real-time, powers multi-tiered role authorization (Students, Faculty Associates, and ITSO Administrators), enforces academic borrowing policies, and generates analytical audit reports.
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+---
 
-## Important Change with index.php
+## 👩‍💻 Role & Leadership
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+**Role:** Project Lead & Full-Stack Developer  
+**Developer:** [Althea Zuleika Sadicon](https://github.com/briee1w)  
+**Academic Focus:** BSIT — Web and Mobile Application Development, FEU Tech
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+### Key Contributions:
+- **Project Leadership & Architecture:** Led the development lifecycle from conceptual wireframing and database normalization to cloud deployment.
+- **Backend Architecture & Security:** Designed MVC controllers, models, authentication filters (RBAC), CSRF protection, and session security in CodeIgniter 4.
+- **Database Engineering:** Modeled the relational schema across equipment, users, and borrowing lifecycles with dual driver support (SQLite for zero-config demos and MySQL/MariaDB for cloud scaling).
+- **DevOps & Containerization:** Authored production Docker images on Debian with Apache, dynamic port binding, and automated deployment pipelines for Render.
+- **Frontend & UI/UX:** Crafted a responsive interface adhering to FEU Tech's institutional color palette (Forest Green & Gold) with real-time role badges and dynamic modals.
 
-**Please** read the user guide for a better explanation of how CI4 works!
+---
 
-## Repository Management
+## 🛠️ Technologies & Tools
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+| Layer | Technologies & Tools |
+| :--- | :--- |
+| **Backend Framework** | PHP 8.2+, CodeIgniter 4 (MVC Architecture, PSR-4 Autoloading) |
+| **Frontend** | Semantic HTML5, Vanilla CSS3 (Custom Design System), JavaScript (ES6+), Google Fonts |
+| **Database** | SQLite3 (Preloaded Embedded DB) & MySQL / MariaDB (Multi-Driver DB Architecture) |
+| **DevOps & Hosting** | Docker, Apache (`mod_rewrite`), Render Web Services, Git / GitHub |
+| **Security & Standards** | Bcrypt Password Hashing, CSRF Protection, Input Validation Filters, RBAC |
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+---
 
-## Server Requirements
+## ✨ Core Features & Workflows
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+### 1. 🛡️ Role-Based Access Control (RBAC)
+- **ITSO Personnel (Admin):** Full administrative authority. Manage inventory, approve/reject borrow requests, log equipment maintenance, generate exportable reports, and manage user accounts.
+- **Faculty / Associates:** Priority borrowing privileges with extended borrowing limits for classroom and research use.
+- **Students:** Browse catalog of available hardware, submit loan requests for academic subjects, and monitor real-time approval status.
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+### 2. 📋 Equipment Inventory & Lifecycle Tracking
+- Tracks laptops, DLP projectors, remote controls, HDMI/VGA cables, and drawing tablets.
+- Real-time stock calculation (`total_quantity`, `available_quantity`, `in_use_quantity`, `under_maintenance`).
+- Automatic status transitions: flags equipment as `available`, `unavailable`, or `maintenance` based on live availability thresholds.
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+### 3. 🔄 Borrowing & Reservation Workflow
+- Request submission specifying purpose (class, lab experiment, research), professor, and room number.
+- One-click approval, rejection, and return check-in by ITSO Personnel with automatic stock replenishment.
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+### 4. 📊 Audit & Analytical Reporting
+- Exportable audit logs for:
+  - Active equipment in circulation
+  - Unusable / under-maintenance inventory
+  - Complete historical borrowing logs with date filters
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+---
+
+## 🚀 Live Demo & Demo Accounts
+
+Try out the live deployment directly in your browser:
+
+### 🔑 Test Credentials:
+
+Click any **role badge** on the login page to auto-fill demo credentials, or sign in using:
+
+| Role | Username / Email | Password | Access Level |
+| :--- | :--- | :--- | :--- |
+| **ITSO Personnel** | `itso_admin` | `admin123` | Full administrative control & report generation |
+| **Associate / Faculty** | `faculty_user` | `faculty123` | Priority reservation & extended loan periods |
+| **Student** | `student_user` | `student123` | Equipment catalog browsing & loan requests |
+
+> *Team lead account: `altheaxzuleika` / `Password123!`*
+
+---
+
+## 🏗️ Architecture & Database Design
+
+```mermaid
+erDiagram
+    USERS ||--o{ BORROW_REQUESTS : "submits"
+    USERS ||--o{ BORROW_REQUESTS : "approves (as ITSO)"
+    EQUIPMENT ||--o{ BORROW_REQUESTS : "allocated in"
+
+    USERS {
+        int id PK
+        string username UK
+        string email UK
+        string password
+        enum role "student | associate | itso_personnel"
+        string department
+        int is_active
+    }
+
+    EQUIPMENT {
+        int equipment_id PK
+        string equipment_code UK
+        string name
+        string category
+        int total_quantity
+        int available_quantity
+        int in_use_quantity
+        int under_maintenance
+        enum status "available | unavailable | maintenance"
+    }
+
+    BORROW_REQUESTS {
+        int borrow_id PK
+        int equipment_id FK
+        int student_id FK
+        string purpose
+        string professor_name
+        date borrow_date
+        date expected_return_date
+        enum status "pending | approved | rejected | borrowed | returned"
+        int approved_by FK
+    }
+```
+
+---
+
+## 💻 Local Installation & Setup
+
+### Option A: Standard PHP Local Server
+```bash
+# 1. Clone the repository
+git clone https://github.com/briee1w/itso-equipment-management.git
+cd itso-equipment-management
+
+# 2. Start the built-in development server (SQLite is pre-configured)
+php spark serve
+```
+Visit `http://localhost:8080` in your browser.
+
+---
+
+### Option B: Docker Deployment
+```bash
+# Build the Docker image
+docker build -t itso-ems .
+
+# Run the container
+docker run -p 8080:80 itso-ems
+```
+Visit `http://localhost:8080` in your browser.
+
+---
+
+## 👥 Development Team
+
+- **Althea Zuleika Sadicon** — Project Leader & Full-Stack Developer ([@briee1w](https://github.com/briee1w))
+- **Khristian Jose Guinto** — Backend Developer & Database Architect
+- **Jan Rodmil Santos** — Backend Developer
+
+---
+
+<div align="center">
+  <sub>Developed for academic fulfillment at FEU Institute of Technology • BSIT Program</sub>
+</div>
