@@ -168,7 +168,7 @@ Visit `http://localhost:8080` in your browser.
 
 ## 👥 Development Team
 
-- **Althea Zuleika Sadicon** — Project Leader & Full-Stack Developer ([@briee1w](https://github.com/briee1w))
+- **Althea Zuleika Sadicon** — Project Leader & Full-Stack Developer 
 - **Khristian Jose Guinto** — Backend Developer & Database Architect
 - **Jan Rodmil Santos** — Backend Developer
 
