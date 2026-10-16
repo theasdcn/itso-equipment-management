@@ -13,9 +13,9 @@ class Database extends Config
 
     public array $default = [
         'DSN'          => '',
-        'hostname'     => 'localhost',
-        'username'     => 'root',
-        'password'     => '',
+        'hostname'     => '127.0.0.1',
+        'username'     => 'itso_db_user',
+        'password'     => 'itso_password_123',
         'database'     => 'itso_equipment_db',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
